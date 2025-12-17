@@ -9,18 +9,19 @@
   
 -A Streamlit web application allows users to upload images and receive real-time predictions.
 
-
+---
 
 ### Project Details
 
 - Model: MobileNetV2 (ImageNet pre-trained, fine-tuned)
-- Dataset: CASIA 2.0  
+- Dataset: [CASIA 2.0](https://www.kaggle.com/datasets/divg07/casia-20-image-tampering-detection-dataset)
     - Total images: 12,614  
     - Real: 7,491  
     - Fake: 5,123
 - Test Accuracy: ~90%
+- Trained model saved to forgery_detector.keras
 
-
+---
 
 ### Model Pipeline 
 
@@ -37,7 +38,7 @@ The same preprocessing pipeline is applied consistently during:
 - Training
 - Evaluation
 
-
+---
 
 ### Evaluation
 
@@ -46,7 +47,7 @@ Model performance is analyzed using:
 - Confusion matrix
 - ROC–AUC curve
 
-
+---
 
 ### FILES 
 - preprocess.py --> Generates ELA-preprocessed images
@@ -55,7 +56,7 @@ Model performance is analyzed using:
 - app.py ---------> Runs the streamlit application for Interactive testing
 - requirements.txt -> Python  dependencies
 
-
+---
 
 ### HOW TO RUN 
 ``` bash
@@ -68,7 +69,9 @@ python preprocess.py
 python train.py
 python evaluate.py
 ```
-## How to run the app #####
-```bash
-python -m streamlit run app.py
-```
+### Test the app
+A few sample images are included in `demo_images/` to try the app:
+
+1. Run the app: `python -m streamlit run app.py`  
+2. Upload any image from `demo_images/`  
+3. See the model’s prediction: REAL or FAKE

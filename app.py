@@ -39,7 +39,7 @@ st.write(
 
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("forgery_detector2_old.keras")
+    return tf.keras.models.load_model("forgery_detector2.keras")
 
 model = load_model()
 
