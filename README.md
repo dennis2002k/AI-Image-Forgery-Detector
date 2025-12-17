@@ -49,6 +49,8 @@ Model performance is analyzed using:
 - Confusion matrix
 - ROC–AUC curve
 
+All evaluation results and plots are saved in the `results/` folder.
+
 ---
 
 ### FILES 
