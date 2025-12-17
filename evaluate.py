@@ -3,9 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, roc_curve, auc
 
+MODEL_KERAS  = "forgery_detector.keras"
 
 def load_model():
-    return tf.keras.models.load_model("forgery_detector2.keras")
+    return tf.keras.models.load_model(MODEL_KERAS)
 
 model = load_model()
 

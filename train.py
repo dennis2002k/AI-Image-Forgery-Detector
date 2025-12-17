@@ -10,6 +10,7 @@ TEST_DATA_PATH = "test_data"
 TRAIN_DATA_PATH = "train_data"
 INITIAL_EPOCHS = 10
 FINE_TUNE_EPOCHS = 60
+MODEL_KERAS  = "forgery_detector.keras"
 
 # Save histories from 2 separate model.fits as one combined
 def combine_histories(h1, h2):
@@ -127,14 +128,7 @@ np.save("history.npy", combined_history)
 loss, acc = model.evaluate(test_ds)
 print(f"\nFinal Test Accuracy: {acc:.4f}")
 
-# Save model
-MODEL_DIR = "saved_model2"
-MODEL_H5  = "forgery_detector2.keras"
-
-# Save SavedModel format (directory)
-model.export(MODEL_DIR)
-print(f"Exported SavedModel to: {MODEL_DIR}/")
 
 # Save Keras native format (.keras)
-model.save(MODEL_H5)
-print(f"Saved model to: {MODEL_H5}")
+model.save(MODEL_KERAS)
+print(f"Saved model to: {MODEL_KERAS}")

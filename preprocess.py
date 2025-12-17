@@ -29,35 +29,37 @@ def create_ela_image(image_path, quality=90, scale=10):
     return np.array(ela_image).astype("float32") / 255.0
 
 
+def preprocess():
+    # Load dataset (true and false) and pre-process data
+    X, y = [], []
+    print("Creating ELA images...")
+    for label, classname in enumerate(["fake", "real"]):
+        folder = os.path.join(DATASET_DIR, classname)
+        for filename in os.listdir(folder):
+            if not filename.lower().endswith((".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".tif")):
+                continue
+            try:
+                img = create_ela_image(os.path.join(folder, filename))
+                X.append(img)
+                y.append(label)
+            except:
+                print("Skipped bad image:", filename)
 
-# Load dataset (true and false) and pre-process data
-X, y = [], []
-print("Creating ELA images...")
-for label, classname in enumerate(["fake", "real"]):
-    folder = os.path.join(DATASET_DIR, classname)
-    for filename in os.listdir(folder):
-        if not filename.lower().endswith((".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".tif")):
-            continue
-        try:
-            img = create_ela_image(os.path.join(folder, filename))
-            X.append(img)
-            y.append(label)
-        except:
-            print("Skipped bad image:", filename)
+    X = np.array(X)
+    y = np.array(y)
+    print(f"Loaded {len(X)} images: Real={sum(y==1)}, Fake={sum(y==0)}")
 
-X = np.array(X)
-y = np.array(y)
-print(f"Loaded {len(X)} images: Real={sum(y==1)}, Fake={sum(y==0)}")
+    # Split data to train and test data (80%-20%)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
 
-# Split data to train and test data (80%-20%)
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-)
+    np.save(f"{TEST_DATA_PATH}/X_test.npy", X_test)
+    np.save(f"{TEST_DATA_PATH}/y_test.npy", y_test)
 
-np.save(f"{TEST_DATA_PATH}/X_test.npy", X_test)
-np.save(f"{TEST_DATA_PATH}/y_test.npy", y_test)
-
-np.save(f"{TRAIN_DATA_PATH}/X_train.npy", X_train)
-np.save(f"{TRAIN_DATA_PATH}/y_train.npy", y_train)
+    np.save(f"{TRAIN_DATA_PATH}/X_train.npy", X_train)
+    np.save(f"{TRAIN_DATA_PATH}/y_train.npy", y_train)
 
 
+if __name__ == "__main__":
+    preprocess()

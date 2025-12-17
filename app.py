@@ -3,25 +3,11 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image, ImageChops, ImageEnhance
+from preprocess import create_ela_image
 
 IMG_SIZE = (224, 224)
+MODEL_KERAS  = "forgery_detector.keras"
 
-def create_ela_image(image_path, quality=90, scale=10):
-    original = Image.open(image_path).convert("RGB")
-    buffer = "temp.jpg"
-    original.save(buffer, 'JPEG', quality=quality)
-    compressed = Image.open(buffer)
-    ela_image = ImageChops.difference(original, compressed)
-    
-    extrema = ela_image.getextrema()
-    max_diff = max([ex[1] for ex in extrema])
-    if max_diff == 0:
-        max_diff = 1
-    scale_factor = scale * 255.0 / max_diff
-    ela_image = ImageEnhance.Brightness(ela_image).enhance(scale_factor)
-    
-    ela_image = ela_image.resize(IMG_SIZE)
-    return np.array(ela_image).astype("float32") / 255.0
 
 st.set_page_config(
     page_title="Deepfake Image Detector",
@@ -39,7 +25,7 @@ st.write(
 
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("forgery_detector2.keras")
+    return tf.keras.models.load_model(MODEL_KERAS)
 
 model = load_model()
 
@@ -65,19 +51,3 @@ if uploaded_file:
     else:
         st.error(f"🚨 FAKE ({1 - pred:.2%})")
 
-# # Run prediction
-# if uploaded_file is not None:
-#     image = Image.open(uploaded_file).convert("RGB")
-
-#     st.image(image, caption="Uploaded Image", use_column_width=True)
-
-#     with st.spinner("Analyzing image..."):
-#         result =  1
-
-#     st.subheader("Prediction")
-
-#     for pred in result:
-#         label = pred["label"]
-#         score = pred["score"]
-
-#         st.write(f"**{label}**: {score:.2%}")

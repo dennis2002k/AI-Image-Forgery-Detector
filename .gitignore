@@ -11,9 +11,6 @@ __pycache__/
 .env
 .jpg
 
-# Ignore all JPG images
-*.jpg
-*.jpeg
 
 # OS
 .DS_Store
