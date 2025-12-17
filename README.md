@@ -53,7 +53,7 @@ All evaluation results and plots are saved in the `results/` folder.
 
 ---
 
-### FILES 
+### Files 
 - preprocess.py ---> Generates ELA-preprocessed images
 - train.py ----------> Trains and fine-tunes the MobileNetV2 model
 - evaluate.py ------> Evaluates the trained model
@@ -62,17 +62,21 @@ All evaluation results and plots are saved in the `results/` folder.
 
 ---
 
-### HOW TO RUN 
+### How to run 
 ``` bash
 pip install -r requirements.txt
 ```
 
-## HOW TO TRAIN THE MODEL (optional-model already trained) #######
+## How to train and evaluate the model (optional)(model already trained) 
 ```bash
 python preprocess.py
 python train.py
 python evaluate.py
 ```
+
+---
+
+
 ### Test the app
 A few sample images are included in `demo_images/` to try the app:
 
