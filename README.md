@@ -52,8 +52,8 @@ Model performance is analyzed using:
 ---
 
 ### FILES 
-- preprocess.py ----> Generates ELA-preprocessed images
-- train.py ---------> Trains and fine-tunes the MobileNetV2 model
+- preprocess.py ---> Generates ELA-preprocessed images
+- train.py ----------> Trains and fine-tunes the MobileNetV2 model
 - evaluate.py ------> Evaluates the trained model
 - app.py -----------> Runs the streamlit application for Interactive testing
 - requirements.txt -> Python  dependencies
