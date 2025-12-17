@@ -58,13 +58,17 @@ Model performance is analyzed using:
 
 
 ### HOW TO RUN 
-
-1. pip install -r requirements.txt
+``` bash
+pip install -r requirements.txt
+```
 
 ## HOW TO TRAIN THE MODEL (optional-model already trained) #######
-2. python preprocess.py
-3. python train.py
-4. python evaluate.py
-
+```bash
+python preprocess.py
+python train.py
+python evaluate.py
+```
 ## How to run the app #####
-5. python -m streamlit --version
+```bash
+python -m streamlit run app.py
+```
