@@ -1,0 +1,19 @@
+# Datasets
+data/
+dataset/
+CASIA*
+train_data/
+test_data/
+
+# Python
+__pycache__/
+.venv/
+.env
+.jpg
+
+# Ignore all JPG images
+*.jpg
+*.jpeg
+
+# OS
+.DS_Store
